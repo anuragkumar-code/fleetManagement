@@ -1,5 +1,5 @@
 import React from 'react';
-import VehicleDeviceTable from '../components/VehicleDeviceTable';
+import VehicleDeviceTable from '../components/vehiclemapped/VehicleDeviceTable';
 
 const HomePage = () => {
     return (

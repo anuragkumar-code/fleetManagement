@@ -1,28 +1,39 @@
 // App.js
 
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route, Switch} from "react-router-dom";
+import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import Navbar from './components/Navbar';
 
 import HomePage from './pages/HomePage';
-import DeviceMappingPage from './pages/DeviceMappingPage';
+
+import DevicePage from './pages/DevicePage';
 import AddDevicePage from './pages/AddDevicePage';
-import AddVehiclePage from './pages/AddVehiclePage';
+
+import VehiclePage from './pages/VehiclePage';
 
 function App() {
+
+    const router = createBrowserRouter([
+        {
+            path:'/',
+            element:<><Navbar /><HomePage/></>
+        },
+        {
+            path:'/devices',
+            element:<><Navbar /><DevicePage/></>
+        },
+        {
+            path:'/vehicles',
+            element:<><Navbar /><VehiclePage/></>
+        },
+        {
+            path:'/add-device',
+            element:<><Navbar /><AddDevicePage/></>
+        }
+
+    ])
     return (
-        <Router>
-            <div>
-                <Navbar />
-                <Routes>
-                    <Route exact path="/" component={HomePage} />
-                    <Route path="/device-mapping" component={DeviceMappingPage} />
-                    <Route path="/add-device" component={AddDevicePage} />
-                    <Route path="/add-vehicle" component={AddVehiclePage} />
-                </Routes>
-                {/* <HomePage /> */}
-            </div>
-        </Router>
+        <RouterProvider router={router} />
     );
 }
 
