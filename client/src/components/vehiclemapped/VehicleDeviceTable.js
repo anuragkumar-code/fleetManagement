@@ -10,7 +10,7 @@ const VehiclesTable = () => {
 
     const fetchVehicles = async () => {
         try {
-            const response = await fetch('http://localhost:4000/api-vehicle/vehicles');
+            const response = await fetch('http://localhost:4000/api-mapping/mapped');
             if (!response.ok) {
                 throw new Error('Failed to fetch vehicles');
             }
@@ -36,15 +36,15 @@ const VehiclesTable = () => {
                     <tr>
                         <th>S. No.</th>
                         <th>Vehicle Name</th>
-                        <th>Vehicle VIN</th>
+                        <th>Device Name</th>
                     </tr>
                 </thead>
                 <tbody>
                     {vehicles.map((vehicle,index) => (
                         <tr key={vehicle.id}>
                             <td>{index+1}</td>
-                            <td>{vehicle.name}</td>
-                            <td>{vehicle.vin}</td>
+                            <td>{vehicle.vehicle_name}</td>
+                            <td>{vehicle.device_name}</td>
                         </tr>
                     ))}
                 </tbody>

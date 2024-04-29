@@ -18,7 +18,7 @@ app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.get('/', (req, res) => {
-    res.send('Welcome to the Fleet Management API!');
+  res.send('Welcome to the Fleet Management API!');
 });
 
 app.use('/api-device', deviceRoutes);
@@ -26,9 +26,11 @@ app.use('/api-vehicle', vehicleRoutes);
 app.use('/api-mapping', mappingRoutes);
 
 const sequelize = new Sequelize(process.env.DB_NAME, process.env.MYSQL_USER, process.env.MYSQL_PASSWORD, {
-    host: process.env.MYSQL_HOST,
-    dialect: 'mysql',
-    logging: console.log, 
+  host: process.env.MYSQL_HOST,
+  dialect: 'mysql',
+  logging: (msg) => {
+    console.log('SQL Logs :', msg);
+  }, 
 });
 
 sequelize.authenticate()
@@ -40,5 +42,5 @@ sequelize.authenticate()
 });  
 
 app.listen(PORT, () => {
-    console.log(`Server running on port ${PORT}`);
+  console.log(`Server running on port ${PORT}`);
 });

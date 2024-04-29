@@ -1,9 +1,6 @@
 const { Sequelize, DataTypes } = require('sequelize');
 const config = require('../config/config.json');
 
-const Device = require('./DeviceModel');
-const Vehicle = require('./VehicleModel');
-
 const sequelize = new Sequelize(config.development);
 
 const DeviceVehicleMapping = sequelize.define('DeviceVehicleMapping', {
@@ -30,7 +27,6 @@ const DeviceVehicleMapping = sequelize.define('DeviceVehicleMapping', {
     },
 });
 
-DeviceVehicleMapping.belongsTo(Device, { foreignKey: 'deviceId' });
-DeviceVehicleMapping.belongsTo(Vehicle, { foreignKey: 'vehicleId' });
+
 
 module.exports = DeviceVehicleMapping;

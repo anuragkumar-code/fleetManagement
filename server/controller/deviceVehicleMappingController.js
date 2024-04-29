@@ -9,13 +9,18 @@ const sequelize = new Sequelize(config.development);
 
 const getDeviceVehicleMappings = async (req, res) => {
     try {
-        const deviceVehicleMappings = await DeviceVehicleMapping.findAll();
-        res.status(200).json(deviceVehicleMappings);
+        const query = `SELECT devicevehiclemappings.id, devices.name AS device_name, vehicles.name AS vehicle_name FROM devicevehiclemappings INNER JOIN
+            devices ON devicevehiclemappings.deviceId = devices.id INNER JOIN vehicles ON devicevehiclemappings.vehicleId = vehicles.id`;
+
+        const mappedDevicesAndVehicles = await sequelize.query(query, { type: sequelize.QueryTypes.SELECT });
+
+        res.status(200).json(mappedDevicesAndVehicles);
     } catch (error) {
-        console.error('Error fetching device vehicle mappings:', error);
+        console.error('Error fetching mapped devices and vehicles:', error);
         res.status(500).json({ message: 'Something went wrong' });
     }
 };
+
 
 
 const mapDeviceToVehicle = async (req, res) => {
